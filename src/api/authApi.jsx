@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 export const login = async (credentials) => {
   try {
-    const response = await axiosInstance.post("auth/login", credentials);
+    const response = await axiosInstance.post("auth/login", credentials,{headers:{"Content-Type" : "application/json"}});
     return response.data;
   } catch (error) {
     return error;
@@ -11,16 +11,17 @@ export const login = async (credentials) => {
 
 export const register = async (credentials) => {
     try {
-      const response = await axiosInstance.post("auth/register", credentials);
+      console.log(credentials);
+      const response = await axiosInstance.post("auth/register", credentials,{headers:{"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
     }
 };
 
-export const forgetPassword = async (emailUser) => {
+export const forgetPassword = async (email) => {
     try {
-      const response = await axiosInstance.put("auth/forget-password", { email: emailUser });
+      const response = await axiosInstance.put("auth/forget-password", email,{headers:{"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
@@ -38,16 +39,16 @@ export const refreshToken = async (token) => {
 
 export const verifyOtp = async (otpData) => {
     try {
-      const response = await axiosInstance.post("auth/verify-otp", otpData);
+      const response = await axiosInstance.post("auth/verify-otp", otpData,{headers:{"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
     }
   };
   
-export const sendOtp = async (emailUser) => {
+export const sendOtp = async (email) => {
     try {
-      const response = await axiosInstance.post("auth/send-otp", { email: emailUser });
+      const response = await axiosInstance.post("auth/send-otp", email,{headers:{"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;

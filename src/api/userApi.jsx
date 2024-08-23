@@ -9,7 +9,7 @@ export const currentUser = async () => {
   }
 };
 
-export const editeInfoUser = async (userId,newDate) => {
+export const editInfo = async (userId,newDate) => {
     try {
       const response = await axiosInstance.put(`user/edit-user/${userId}`,newDate);
       return response.data;

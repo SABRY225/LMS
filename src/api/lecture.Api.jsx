@@ -16,7 +16,7 @@ export const editLecture = async (lectureId,newData) => {
     } catch (error) {
       return error;
     }
-  };
+};
 
 export const deleteLecture = async (lectureId) => {
     try {
@@ -34,7 +34,7 @@ export const lectureInfo = async (lectureId) => {
     } catch (error) {
       return error;
     }
-  };
+};
 
 export const lecturesData = async () => {
     try {
@@ -43,4 +43,4 @@ export const lecturesData = async () => {
     } catch (error) {
       return error;
     }
-  };
+};

@@ -1,23 +1,22 @@
-import ImgtopLeft from '../../assets/topleft.png'
-import ImgtopReigth from '../../assets/topReigth.png'
+import { Outlet } from 'react-router-dom';
+import image from '../../assets/image.png';
+import '../Style/landingStyle.css';
+
 function Landing() {
   return (
     <>
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6 shape">
-          <img src={ImgtopLeft} alt="" />
+      <div className="container-fluid m-0">
+        <div className="row">
+          <div className="col-md-6 d-none d-md-block">
+            <img src={image} alt="Landing Image" className="position-fixed img-fluid" />
+          </div>
+          <div className="col-md-6">
+            <Outlet />
+          </div>
         </div>
-        <div className="col-md-6 shape" >
-        <img src={ImgtopLeft} alt="" />
-        </div>
-
       </div>
-      <div className="row"></div>
-      <div className="row"></div>
-    </div>
     </>
-  )
+  );
 }
 
-export default Landing
+export default Landing;

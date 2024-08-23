@@ -34,7 +34,7 @@ export const examInfo = async (examId) => {
     } catch (error) {
       return error;
     }
-  };
+};
 
 export const examData = async () => {
     try {
@@ -45,11 +45,21 @@ export const examData = async () => {
     }
 };
 
-export const editResult = async (examId) => {
+export const editResult = async (resultId) => {
     try {
-      const response = await axiosInstance.put(`exam/edit-result/${examId}`);
+      const response = await axiosInstance.put(`exam/edit-result/${resultId}`);
       return response.data;
     } catch (error) {
       return error;
     }
+};
+
+
+export const addResult = async (examId) => {
+  try {
+    const response = await axiosInstance.post(`exam/add-result/${examId}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 };
