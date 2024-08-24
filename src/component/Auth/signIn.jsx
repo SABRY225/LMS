@@ -1,28 +1,15 @@
 import { useState } from 'react';
 import Header from '../Landing/Header';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, } from 'react-redux';
 import { signInUser } from '../../redux/actions/authAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function SignIn() {
-    const role = useSelector((state) => state.auth.role);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    //   useEffect(() => {
-    //     if (auth.isAuthenticated) {
-    //       if (roles == "Student") {
-    //         navigate('/Student');
-    //       } else if (roles == "Teacher"){
-    //         navigate('/Teacher'); // Adjust as needed
-    //       } else {
-    //         navigate('/Admin'); // Adjust as needed
-    //       }
-    //     }
-    //   }, [auth, roles, navigate]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         let formData = {
@@ -31,17 +18,24 @@ function SignIn() {
         };
         let jsonData = JSON.stringify(formData);
         dispatch(signInUser(jsonData)).then((response) => {
-            console.log(response.error);
+            console.log(response);
             if (response.payload.message !=='Login successful') {
                 toast.error("فشلت عمليت التسجيل الرجاء المحاولة مرة أخري");
             } else {
-                toast.success("لقد نجحت عمليت التسجيل ");
-                navigate(`/landing/${formData.email}/verifyRgister`);
-                console.log(role);
+                 toast.success("لقد نجحت عمليت التسجيل ");
+                localStorage.setItem('token',response.payload.Token)
+                localStorage.setItem('roleStorage',response.payload.Role)
+                const role=localStorage.getItem('roleStorage')
+                if (role=="Admin") {
+                    navigate(`/admin`);
+                }else if(role=="Teacher"){
+                    navigate(`/teachr`);
+                }else{
+                    navigate(`/student`);
+                }
             }
         });
     };
-
     return (
         <>
         <div className="col-md-12 " dir="rtl">
@@ -62,6 +56,7 @@ function SignIn() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        dir="rtl"
                     />
                 </div>
                 <div className=' col-md-12 form-group mb-1 text-end fw-bold fs-5'>

@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom"
 
-function TeacherPage() {
+
+function AdminPage() {
   return (
-    <>
     <Outlet />
-    </>
   )
 }
 
-export default TeacherPage
+export default AdminPage

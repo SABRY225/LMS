@@ -1,0 +1,40 @@
+
+.profile img{
+    border-radius: 50%;
+    width: 175px;
+    height: 174px;
+    border: 5px solid #EBB435;
+}
+
+
+.profile .box{
+    border: 0.1px solid #EBB435;
+    padding: 1rem;
+    margin: 1rem 0.3rem;
+    border-radius: 10px;
+}
+.profile .btnProfile{
+    border: 1px solid #fff;
+    padding: 0.5rem;
+    margin: 0.5rem 0.1rem;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+.profile .btnEdit{
+    background-color: #EBB435;
+    border-color: #EBB435;
+}
+.profile .btnDelete{
+    background-color: rgba(255, 0, 0, 0.934);
+    border-color: red;
+
+}
+.profile .btnEdit:hover{
+    background-color: #fff;
+    color: #EBB435;
+}
+.profile .btnDelete:hover{
+    background-color: #fff;
+    color: red;
+}

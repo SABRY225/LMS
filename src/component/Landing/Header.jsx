@@ -4,7 +4,7 @@ function Header() {
         <>
             <div className="logo col-md-12 text-center ">
                 <i className="fas fa-graduation-cap fs-1"></i>
-                <span className='fs-1 fw-bold'>Education</span>
+                <span className='fs-1 fw-bold m-3'>تعلم</span>
             </div>
             <div className='text-end m-5'>
                 <div className=' fs-2'>مرحبا بعودتك</div>

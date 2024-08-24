@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { currentUser, deleteUser, editInfo, usersData } from '../../api/userApi';
 
 
-export const fetchCurrentUser = createAsyncThunk('user/', async (_, { rejectWithValue }) => {
+export const fetchCurrentUser = createAsyncThunk('user/', async (token, { rejectWithValue }) => {
     try {
-      const data = await currentUser();
+      const data = await currentUser(token);
       return data;
     } catch (error) {
       return rejectWithValue(error);

@@ -22,6 +22,8 @@ const adminSlice = createSlice({
       .addCase(addStudentInCourse.fulfilled, (state, action) => {
         state.loading = false;
         state.message = action.payload;
+        state.error = null;
+
       })
       .addCase(addStudentInCourse.rejected, (state, action) => {
         state.loading = false;

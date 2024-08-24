@@ -3,7 +3,7 @@ import { courseInfo, coursesByStudent, coursesByTeacher, coursesData, craeteCour
 
 export const addCourseAction = createAsyncThunk('course/add-course', async (credentials, { rejectWithValue }) => {
     try {
-      const data = await craeteCourse(credentials);
+      const data = await craeteCourse(credentials.formData,credentials.token);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -19,9 +19,9 @@ export const editCourseAction = createAsyncThunk(`course/edit-course/courseId`, 
     }
 });
 
-export const deleteCourseAction = createAsyncThunk(`course/delete-course/courseId`, async (courseId, { rejectWithValue }) => {
+export const deleteCourseAction = createAsyncThunk(`course/delete-course/courseId`, async (formData, { rejectWithValue }) => {
     try {
-      const data = await deleteCourse(courseId);
+      const data = await deleteCourse(formData.courseId,formData.token);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -46,18 +46,19 @@ export const getCourses = createAsyncThunk(`course/courses/all`, async (_, { rej
     }
 });
 
-export const getCoursesByTeacher = createAsyncThunk(`course/courses-by-teacher/teacherId`, async (teacherId, { rejectWithValue }) => {
+export const getCoursesByTeacher = createAsyncThunk(`course/courses-by-teacher/teacherId`, async (formData, { rejectWithValue }) => {
   try {
-    const data = await coursesByTeacher(teacherId);
+    console.log(formData);
+    const data = await coursesByTeacher(formData.teacherId,formData.token);
     return data;
   } catch (error) {
     return rejectWithValue(error);
   }
 });
 
-export const getCoursesByStudent = createAsyncThunk(`course/courses-by-student/studentId`, async (studentId, { rejectWithValue }) => {
+export const getCoursesByStudent = createAsyncThunk(`course/courses-by-student/studentId`, async (formData, { rejectWithValue }) => {
   try {
-    const data = await coursesByStudent(studentId);
+    const data = await coursesByStudent(formData.studentId,formData.token);
     return data;
   } catch (error) {
     return rejectWithValue(error);

@@ -30,7 +30,7 @@ export const forgetPassword = async (email) => {
 
 export const refreshToken = async (token) => {
     try {
-      const response = await axiosInstance.post("auth/refresh-token",token);
+      const response = await axiosInstance.post("auth/refresh-token",token,{headers:{"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;

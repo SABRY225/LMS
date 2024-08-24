@@ -31,8 +31,8 @@ function ChangePassword() {
         <div className="col-md-12 " dir="rtl">
         <div className='mt-5'>
         <div className="logo col-md-12 text-center ">
-                <i className="fas fa-graduation-cap fs-1"></i>
-                <span className='fs-1 fw-bold'>Education</span>
+        <i className="fas fa-graduation-cap fs-1"></i>
+        <span className='fs-1 fw-bold m-3'>تعلم</span>
             </div>
             <div className='text-center m-5'>
                 <div className='fs-3 fw-bold'>نسيت كلمة السر</div>

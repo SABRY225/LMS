@@ -1,8 +1,8 @@
 import axiosInstance from "./axiosInstance";
 
-export const craeteCourse = async (newData) => {
+export const craeteCourse = async (formData,token) => {
   try {
-    const response = await axiosInstance.post(`course/add-course`,newData);
+    const response = await axiosInstance.post(`course/add-course`,formData,{headers:{"Authorization": `Bearer ${token}`,"Content-Type" : "application/json"}});
     return response.data;
   } catch (error) {
     return error;
@@ -18,9 +18,9 @@ export const editCourse = async (courseId,newData) => {
     }
   };
 
-export const deleteCourse = async (courseId) => {
+export const deleteCourse = async (courseId,token) => {
     try {
-      const response = await axiosInstance.delete(`course/delete-course/${courseId}`);
+      const response = await axiosInstance.delete(`course/delete-course/${courseId}`,{headers:{"Authorization": `Bearer ${token}`,"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
@@ -45,17 +45,17 @@ export const coursesData = async () => {
     }
 };
 
-export const coursesByTeacher = async (teacherId) => {
+export const coursesByTeacher = async (teacherId,token) => {
   try {
-    const response = await axiosInstance.get(`course/courses-by-teacher/${teacherId}`);
+    const response = await axiosInstance.get(`course/courses-by-teacher/${teacherId}`,{headers:{"Authorization": `Bearer ${token}`,"Content-Type" : "application/json"}});
     return response.data;
   } catch (error) {
     return error;
   }
 };
-export const coursesByStudent = async (studentId) => {
+export const coursesByStudent = async (studentId,token) => {
   try {
-    const response = await axiosInstance.get(`course/courses-by-student/${studentId}`);
+    const response = await axiosInstance.get(`course/courses-by-student/${studentId}`,{headers:{"Authorization": `Bearer ${token}`,"Content-Type" : "application/json"}});
     return response.data;
   } catch (error) {
     return error;

@@ -7,8 +7,8 @@ function Landing() {
     <>
       <div className="container-fluid m-0">
         <div className="row">
-          <div className="col-md-6 d-none d-md-block">
-            <img src={image} alt="Landing Image" className="position-fixed img-fluid" />
+          <div className="col-md-6 d-none d-md-block ">
+            <img src={image} alt="Landing Image" className="position-fixed img-fluid w-50 landing-Image " />
           </div>
           <div className="col-md-6">
             <Outlet />

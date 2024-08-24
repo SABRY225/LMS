@@ -9,8 +9,14 @@ import { Provider } from 'react-redux';
 // import AuthPage from './Pages/authPage';
 // import SignIn from './component/Auth/signIn';
 import Landing from './component/Landing/Landing';
-import {SignUp,SignIn, SendEmail, Verify, SelectRole, ChangePassword} from './component/constant/Path';
-
+import {SignUp,SignIn, SendEmail, Verify, SelectRole, ChangePassword, Profile, AddCourse, AddStudent} from './component/constant/Path';
+// import StudentPage from './Pages/StudentPage';
+import '@coreui/coreui/dist/css/coreui.min.css'
+import AppPage from './Pages/appPage';
+import MyCoursesPage from './Pages/MyCoursesPage';
+import TeacherPage from './Pages/teacherPage';
+import AdminPage from './Pages/adminPage';
+import StudentPage from './Pages/studentPage';
  
 const routers = createBrowserRouter([
   {
@@ -39,6 +45,21 @@ const routers = createBrowserRouter([
       </ProtectedRoutes>
     ),
     children: [
+      {index:true,element:<AppPage />},
+      {path:'profile',element:<Profile />},
+      {path:'Teacher',element:<TeacherPage />,children:[
+        {index:true,element:<AddCourse />},
+        {path:':id/mycourses',element:<MyCoursesPage />},
+
+      ]},
+      {path:'admin',element:<AdminPage />,children:[
+        {index:true,element:<AddStudent />}
+
+      ]},
+      {path:'Student',element:<StudentPage />,children:[
+       {path:':id/mycourses',element:<MyCoursesPage />},
+
+      ]}
      
     ],
     errorElement:(<ErrorPage />)

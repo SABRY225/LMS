@@ -1,0 +1,17 @@
+.card img{
+    height: 43vh;
+}
+.namecourse{
+    font-weight: bold;
+    color: #EBB435;
+}
+
+.pricecourse{
+    font-weight: bold;
+    color: #eb5635;
+}
+
+.levelcourse,.semestercourse{
+    color: #333333bb;
+    text-decoration: underline;
+}
