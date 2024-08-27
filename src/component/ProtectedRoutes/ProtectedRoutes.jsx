@@ -3,39 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshAuthToken } from '../../redux/actions/authAction';
 
-
 export default function ProtectedRoutes({ children }) {
-    // let logOutbtn=false
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
-    const token=localStorage.getItem('token')
-    console.log(!token);
+    const token = localStorage.getItem('token');
     
     useEffect(() => {
-        if (!token) {
-            localStorage.removeItem('token');
-            return navigate('/landing')
-        }else{
-            if(!isLoggedIn){
-                let formData = {
-                    token
-                };
-                let jsonData = JSON.stringify(formData);
-                dispatch(refreshAuthToken(jsonData)).then((response) => {
-                    console.log(response);
-                    if (response.error) {
-                        console.log("فشلت عمليت التسجيل الرجاء المحاولة مرة أخري");
-                    } else {
-                       console.log("لقد نجحت عمليت التسجيل ");
-                       localStorage.setItem('token',response.payload.token)
-                       
-                    }
-                });
-             }
+        if (!token || localStorage.getItem('token')=='undefined') {
+            localStorage.clear()
+            localStorage.removeItem('token')
+            navigate('/landing');
+        } else if (!isLoggedIn) {
+            const formData = {
+                token,
+            };
+            dispatch(refreshAuthToken(formData)).then((response) => {
+                if (response.error) {
+                    console.log("فشلت عمليت التسجيل الرجاء المحاولة مرة أخرى");
+                    navigate('/landing');  // Redirect to landing page on failure
+                } else {
+                    localStorage.setItem('token', response.payload.token);
+                }
+            });
         }
-      
-    }, [isLoggedIn, navigate]);
+    }, [dispatch, isLoggedIn, navigate, token]);
 
     if (!isLoggedIn) {
         return null;

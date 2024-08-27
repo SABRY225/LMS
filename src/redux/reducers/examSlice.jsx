@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addExamAction, addExamResult, deleteExamAction, editExamAction, editExamResult, getExamById, getExamsInCourse } from '../actions/examAction';
+import { addExamAction, addExamResult, deleteExamAction, editExamAction, editExamResult, fetchExamsByTeacher, getExamById, getExamsInCourse } from '../actions/examAction';
 
 // Initial state
 const initialState = {
   exams: [],
+  examsByTeaher: [],
   examDetails: null,
   examResult: null,
   loading: false,
@@ -12,7 +13,7 @@ const initialState = {
 
 // Exam slice
 const examSlice = createSlice({
-  name: 'exams',
+  name: 'exam',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -24,6 +25,7 @@ const examSlice = createSlice({
       .addCase(addExamAction.fulfilled, (state, action) => {
         state.loading = false;
         state.exams.push(action.payload);
+
       })
       .addCase(addExamAction.rejected, (state, action) => {
         state.loading = false;
@@ -65,6 +67,18 @@ const examSlice = createSlice({
         state.exams = action.payload;
       })
       .addCase(getExamsInCourse.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Get exams in course
+      .addCase(fetchExamsByTeacher.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchExamsByTeacher.fulfilled, (state, action) => {
+        state.loading = false;
+        state.examsByTeaher = action.payload;
+      })
+      .addCase(fetchExamsByTeacher.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

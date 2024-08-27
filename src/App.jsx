@@ -6,17 +6,23 @@ import ProtectedRoutes from './component/ProtectedRoutes/ProtectedRoutes';
 import {LayoutAuth, LayoutAPP,ErrorPage} from './Layout/index';
 import Store from './redux/store/stroe';
 import { Provider } from 'react-redux';
-// import AuthPage from './Pages/authPage';
-// import SignIn from './component/Auth/signIn';
 import Landing from './component/Landing/Landing';
 import {SignUp,SignIn, SendEmail, Verify, SelectRole, ChangePassword, Profile, AddCourse, AddStudent} from './component/constant/Path';
-// import StudentPage from './Pages/StudentPage';
 import '@coreui/coreui/dist/css/coreui.min.css'
 import AppPage from './Pages/appPage';
 import MyCoursesPage from './Pages/MyCoursesPage';
 import TeacherPage from './Pages/teacherPage';
 import AdminPage from './Pages/adminPage';
 import StudentPage from './Pages/studentPage';
+import MyLecturePage from './Pages/myLecturePage';
+import AddLecture from './component/Dashboard/dashboardTeacher/addLecture';
+import EditLecture from './component/Dashboard/dashboardTeacher/editLecture';
+import EditCourse from './component/Dashboard/dashboardTeacher/editCourse';
+import EditExam from './component/Dashboard/dashboardTeacher/editExam';
+import AddExam from './component/Dashboard/dashboardTeacher/addExam';
+import MyExamPage from './Pages/myExamPage';
+import ViewLecturePage from './Pages/ViewLecturePage';
+import ViewExamPage from './Pages/viewExamPage';
  
 const routers = createBrowserRouter([
   {
@@ -25,6 +31,7 @@ const routers = createBrowserRouter([
         <LayoutAuth />
     ),
     children: [
+      {index:true,element:<AppPage />},
       {path:"landing",element:<Landing /> ,children:[
         {index:true,element:<SignIn />},
         {path:"register/:role",element:<SignUp />},
@@ -33,6 +40,7 @@ const routers = createBrowserRouter([
         {path:"selectRole",element:<SelectRole />},
         {path:":email/changePassword",element:<ChangePassword />}
       ]},
+      {path:"#",element:<ErrorPage />}
 
     ],
     errorElement:(<ErrorPage />)
@@ -45,12 +53,22 @@ const routers = createBrowserRouter([
       </ProtectedRoutes>
     ),
     children: [
-      {index:true,element:<AppPage />},
       {path:'profile',element:<Profile />},
       {path:'Teacher',element:<TeacherPage />,children:[
-        {index:true,element:<AddCourse />},
-        {path:':id/mycourses',element:<MyCoursesPage />},
-
+        // course
+        {index:true,element:<MyCoursesPage />},
+        {path:':id/addcourse',element:<AddCourse />},
+        {path:':courseId/editcourse',element:<EditCourse />},
+        // lecture
+        {path:':id/mylecture',element:<MyLecturePage />},
+        {path:':id/addlecture',element:<AddLecture />},
+        {path:':lectureId/editlecture',element:<EditLecture />},
+        {path:':lectureId/viewlecture',element:<ViewLecturePage />},
+        // exam
+        {path:':id/myexam',element:<MyExamPage />},
+        {path:':id/addexam',element:<AddExam />},
+        {path:':examId/editexam',element:<EditExam />},
+        {path:':examId/viewexam',element:<ViewExamPage />}
       ]},
       {path:'admin',element:<AdminPage />,children:[
         {index:true,element:<AddStudent />}
@@ -58,7 +76,8 @@ const routers = createBrowserRouter([
       ]},
       {path:'Student',element:<StudentPage />,children:[
        {path:':id/mycourses',element:<MyCoursesPage />},
-
+       {path:':id/mylecture',element:<MyLecturePage />},
+       {path:':courseId/myexam',element:<MyExamPage />},
       ]}
      
     ],

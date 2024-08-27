@@ -29,9 +29,9 @@ function SignIn() {
                 if (role=="Admin") {
                     navigate(`/admin`);
                 }else if(role=="Teacher"){
-                    navigate(`/teachr`);
+                    navigate(`/Teacher`);
                 }else{
-                    navigate(`/student`);
+                    navigate(`/Student`);
                 }
             }
         });

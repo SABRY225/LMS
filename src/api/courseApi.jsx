@@ -11,7 +11,7 @@ export const craeteCourse = async (formData,token) => {
 
 export const editCourse = async (courseId,newData) => {
     try {
-      const response = await axiosInstance.put(`course/edit-course/${courseId}`,newData);
+      const response = await axiosInstance.put(`course/edit-course/${courseId}`,newData,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
@@ -29,7 +29,7 @@ export const deleteCourse = async (courseId,token) => {
 
 export const courseInfo = async (courseId) => {
     try {
-      const response = await axiosInstance.get(`course/${courseId}`);
+      const response = await axiosInstance.get(`course/${courseId}`,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;

@@ -2,7 +2,7 @@ import axiosInstance from "./axiosInstance";
 
 export const craeteExam = async (courseId,newDate) => {
   try {
-    const response = await axiosInstance.post(`exam/add-exam/${courseId}/add-exam`,newDate);
+    const response = await axiosInstance.post(`exam/${courseId}/add-exam`,newDate,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
     return response.data;
   } catch (error) {
     return error;
@@ -20,7 +20,9 @@ export const editExam= async (examId,newDate) => {
 
 export const deleteExam = async (examId) => {
     try {
-      const response = await axiosInstance.delete(`exam/delete-exam/${examId}`);
+      const response = await axiosInstance.delete(`exam/delete-exam/${examId}`,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
+      console.log(response);
+      
       return response.data;
     } catch (error) {
       return error;
@@ -29,20 +31,29 @@ export const deleteExam = async (examId) => {
 
 export const examInfo = async (examId) => {
     try {
-      const response = await axiosInstance.get(`exam/${examId}`);
+      const response = await axiosInstance.get(`exam/${examId}`,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
     }
 };
 
-export const examData = async () => {
+export const examData = async (courseId) => {
     try {
-      const response = await axiosInstance.get(`exam/exams/all`);
+      const response = await axiosInstance.get(`exam/exams/${courseId}`,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;
     }
+};
+
+export const getExamByTeacher = async (teacherId) => {
+  try {
+    const response = await axiosInstance.get(`exam/examsbyteacher/${teacherId}`,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const editResult = async (resultId) => {

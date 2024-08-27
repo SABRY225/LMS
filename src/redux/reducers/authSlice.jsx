@@ -96,9 +96,7 @@ const authSlice = createSlice({
           state.error = null;
         })
         .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-          state.loading = false;
-          console.log(action.payload);
-          
+          state.loading = false;          
           state.id = action.payload._id;
           state.firstName = action.payload.firstName;
           state.lastName = action.payload.lastName;

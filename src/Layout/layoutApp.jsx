@@ -2,12 +2,15 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import '../component/Style/Sidebar.css'
 import {NavbarTeacher, NavbarAdmin, NavbarStudent } from '../component/constant/Path'
 import { logout } from '../redux/reducers/authSlice'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchCurrentUser } from '../redux/actions/userAction';
 function LayoutAPP() {
   const role = localStorage.getItem('roleStorage');
   const token = localStorage.getItem('token');
+  const id =useSelector(state=>state.auth.id);
+  localStorage.setItem('idUser',id)
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(()=>{

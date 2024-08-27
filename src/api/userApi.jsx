@@ -2,7 +2,6 @@ import axiosInstance from "./axiosInstance";
 
 export const currentUser = async (token) => {
   try {
-    console.log(token);
     const response = await axiosInstance.get("user",{headers:{"Authorization": `Bearer ${token}`,"Content-Type" : "application/json"}});
     return response.data;
   } catch (error) {

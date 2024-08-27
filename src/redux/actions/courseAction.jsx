@@ -12,7 +12,7 @@ export const addCourseAction = createAsyncThunk('course/add-course', async (cred
 
 export const editCourseAction = createAsyncThunk(`course/edit-course/courseId`, async (credentials, { rejectWithValue }) => {
     try {
-      const data = await editCourse(credentials.courseId,credentials.newData);
+      const data = await editCourse(credentials.courseId,credentials.formData);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -31,6 +31,7 @@ export const deleteCourseAction = createAsyncThunk(`course/delete-course/courseI
 export const getCourseById = createAsyncThunk(`course/courseId`, async (courseId, { rejectWithValue }) => {
     try {
       const data = await courseInfo(courseId);
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -48,7 +49,6 @@ export const getCourses = createAsyncThunk(`course/courses/all`, async (_, { rej
 
 export const getCoursesByTeacher = createAsyncThunk(`course/courses-by-teacher/teacherId`, async (formData, { rejectWithValue }) => {
   try {
-    console.log(formData);
     const data = await coursesByTeacher(formData.teacherId,formData.token);
     return data;
   } catch (error) {

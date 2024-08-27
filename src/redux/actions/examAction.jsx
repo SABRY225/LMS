@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addResult, craeteExam, deleteExam, editExam, editResult, examData, examInfo } from '../../api/examApi';
+import { addResult, craeteExam, deleteExam, editExam, editResult, examData, examInfo, getExamByTeacher } from '../../api/examApi';
 
-export const addExamAction = createAsyncThunk('exam/add-exam/courseId/add-exam', async (credentials, { rejectWithValue }) => {
+export const addExamAction = createAsyncThunk('exam/courseId/add-exam', async (credentials, { rejectWithValue }) => {
     try {
       const data = await craeteExam(credentials.courseId,credentials.newDate);
       return data;
@@ -21,6 +21,7 @@ export const editExamAction = createAsyncThunk(`exam/edit-exam/examId`, async (c
 
 export const deleteExamAction = createAsyncThunk(`exam/delete-exam/examId`, async (examId, { rejectWithValue }) => {
     try {
+      console.log(examId);
       const data = await deleteExam(examId);
       return data;
     } catch (error) {
@@ -37,13 +38,24 @@ export const getExamById = createAsyncThunk(`exam/examId`, async (examId, { reje
     }
 });
 
-export const getExamsInCourse = createAsyncThunk(`exam/exams/all`, async (_, { rejectWithValue }) => {
+export const getExamsInCourse = createAsyncThunk(`exam/exams/all`, async (courseId, { rejectWithValue }) => {
     try {
-      const data = await examData();
+      const data = await examData(courseId);
       return data;
     } catch (error) {
       return rejectWithValue(error);
     }
+});
+
+export const fetchExamsByTeacher = createAsyncThunk(`exam/examsbyteacher/teacherId`, async (teacherId, { rejectWithValue }) => {
+  try {
+    console.log(teacherId);
+    
+    const data = await getExamByTeacher(teacherId);
+    return data;
+  } catch (error) {
+    return rejectWithValue(error);
+  }
 });
 
 export const editExamResult = createAsyncThunk(`exam/edit-result/resultId`, async (resultId, { rejectWithValue }) => {

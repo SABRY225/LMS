@@ -14,7 +14,7 @@ const initialState = {
 
 // Course slice
 const courseSlice = createSlice({
-  name: 'courses',
+  name: 'course',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
