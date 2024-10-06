@@ -23,6 +23,9 @@ import AddExam from './component/Dashboard/dashboardTeacher/addExam';
 import MyExamPage from './Pages/myExamPage';
 import ViewLecturePage from './Pages/ViewLecturePage';
 import ViewExamPage from './Pages/viewExamPage';
+import ViewCourse from './Pages/viewCourse';
+import Courses from './Pages/courses';
+import ViewSubCourse from './Pages/ViewSubCourse';
  
 const routers = createBrowserRouter([
   {
@@ -75,9 +78,14 @@ const routers = createBrowserRouter([
 
       ]},
       {path:'Student',element:<StudentPage />,children:[
+       {index:true,element:<Courses />},
        {path:':id/mycourses',element:<MyCoursesPage />},
-       {path:':id/mylecture',element:<MyLecturePage />},
+       {path:':courseId/mylecture',element:<MyLecturePage />},
        {path:':courseId/myexam',element:<MyExamPage />},
+       {path:':courseId/viewcourse',element:<ViewCourse />},
+       {path:':courseId',element:<ViewSubCourse />},
+       {path:':lectureId/viewlecture',element:<ViewLecturePage />},
+
       ]}
      
     ],

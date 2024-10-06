@@ -8,18 +8,21 @@ function CardCourse({ courseImg, name, price, onDelete, level, semester,id }) {
     const handelLink =(courseId)=>{
         navigate(`./${courseId}/editcourse`)
     }
+    const handelLinkView =(courseId)=>{
+        navigate(`/Student/${courseId}/viewcourse`)
+    }
     return (
         <div className="col-md-3 text-dark card m-1 p-3">
             <img src={courseImg} alt="courseImg" />
             <div className="d-flex justify-content-between mt-2">
                 <div className="namecourse">{name}</div>
-                <div className="pricecourse">{price}$</div>
+                <div className="pricecourse">{price}جنيه</div>
             </div>
             <div className="d-flex justify-content-between mt-2">
                 <div className="levelcourse">{level}</div>
                 <div className="semestercourse">{semester}</div>
             </div>
-            {role === 'Teacher' && (
+            {role === 'Teacher' ? (
                 <div className="d-flex justify-content-between mt-3">
                     <button
                         className='btn btn-warning text-light '
@@ -34,7 +37,17 @@ function CardCourse({ courseImg, name, price, onDelete, level, semester,id }) {
                             <i className="fa-solid fa-trash "></i>
                     </button>
                 </div>
-            )}
+            ):(                
+            <div className="d-flex justify-content-center align-items-center mt-3">
+                <button
+                    className='btn btn-warning text-light '
+                    onClick={()=>handelLinkView(id)}
+                >
+                        <span className=' m-2'>عرض الكورس</span>
+                        <i className="fa-solid fa-eye"></i>
+                </button>
+            </div>
+        )}
 
         </div>
     );

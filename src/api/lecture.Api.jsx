@@ -36,9 +36,9 @@ export const lectureInfo = async (lectureId) => {
     }
 };
 
-export const lecturesData = async () => {
+export const lecturesData = async (courseId) => {
     try {
-      const response = await axiosInstance.get(`lecture/lectures/all`);
+      const response = await axiosInstance.get(`lecture/lectures/${courseId}`,{headers:{"Authorization": `Bearer ${localStorage.getItem('token')}`,"Content-Type" : "application/json"}});
       return response.data;
     } catch (error) {
       return error;

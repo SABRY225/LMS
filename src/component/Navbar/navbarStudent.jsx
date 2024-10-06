@@ -6,10 +6,10 @@ function NavbarStudent() {
     return (
         <>
             <li className="sidebar-item  nav-item mb-1">
-                <a href="#exam" className="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#exam" aria-expanded="false" aria-controls="settings">
+                <Link to={`/Student`} className="sidebar-link ">
                     <i className="fa-solid fa-home pe-2"></i>
                     <span className="topic m-2"> الصفحة الرئيسية</span>
-                </a>
+                </Link>
             </li>
             <li className="sidebar-item  nav-item mb-1">
                 <Link to={`/Student/${id}/mycourses`} className="sidebar-link ">

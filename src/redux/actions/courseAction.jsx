@@ -31,7 +31,6 @@ export const deleteCourseAction = createAsyncThunk(`course/delete-course/courseI
 export const getCourseById = createAsyncThunk(`course/courseId`, async (courseId, { rejectWithValue }) => {
     try {
       const data = await courseInfo(courseId);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);

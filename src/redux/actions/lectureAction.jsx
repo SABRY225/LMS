@@ -42,9 +42,9 @@ export const getLectureById = createAsyncThunk(`lecture/lectureId`, async (cours
     }
 });
 
-export const getLecturesInCourse = createAsyncThunk(`lecture/lectures/all`, async (_, { rejectWithValue }) => {
+export const getLecturesInCourse = createAsyncThunk(`lecture/lectures/courseId`, async (courseId, { rejectWithValue }) => {
     try {
-      const data = await lecturesData();
+      const data = await lecturesData(courseId);
       return data;
     } catch (error) {
       return rejectWithValue(error);

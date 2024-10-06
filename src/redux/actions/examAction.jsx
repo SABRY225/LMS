@@ -38,7 +38,7 @@ export const getExamById = createAsyncThunk(`exam/examId`, async (examId, { reje
     }
 });
 
-export const getExamsInCourse = createAsyncThunk(`exam/exams/all`, async (courseId, { rejectWithValue }) => {
+export const getExamsInCourse = createAsyncThunk(`exam/exams/courseId`, async (courseId, { rejectWithValue }) => {
     try {
       const data = await examData(courseId);
       return data;

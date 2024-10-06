@@ -55,7 +55,7 @@ function MyCoursesPage() {
   }, [dispatch, token, role, idUser]);
 
   const courses = role === 'Teacher' ? coursesByTeacher : coursesByStudent;
-
+  
   return (
     <div>
       <h1>كورساتي</h1>
@@ -70,7 +70,7 @@ function MyCoursesPage() {
                 level={role === 'Teacher' ? course.level : course.courseId.level}
                 semester={role === 'Teacher' ? course.semester : course.courseId.semester}
                 key={course._id}
-                id={course._id}
+                id={role === 'Teacher' ? course._id : course.courseId._id}
                 onDelete={() => handleRemoveCourse(course._id)}
               />
             ))

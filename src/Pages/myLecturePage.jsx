@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CardLecture from "../component/Card/CardLecture";
 import Spinner from "../component/loading/Spinner";
-import { fetchLecturesByTeacher } from "../redux/actions/lectureAction";
+import { fetchLecturesByTeacher, getLecturesInCourse } from "../redux/actions/lectureAction";
 
 function MyLecturePage() {
-  const { id } = useParams();
+  const { id,courseId } = useParams();
   const dispatch = useDispatch();
 
   const [lectures, setLectures] = useState([]);
@@ -14,7 +14,8 @@ function MyLecturePage() {
   const token = localStorage.getItem('token');
   
   const lecturesByTeacher = useSelector((state) => state.lecture.lecturesByTeacher);
-
+  const lecturesByStudent = useSelector((state) => state.lecture.lectures);
+  
   useEffect(() => {
     const fetchLectures = async () => {
       if (!token) {
@@ -32,15 +33,10 @@ function MyLecturePage() {
           setLectures(res.payload);
         }
       } else if (role === 'Student') {
-        // Assuming there's an action to fetch lectures by student
-        // const formData = {
-        //   studentId: id,
-        //   token,
-        // };
-        // const res = await dispatch(getLecturesByStudent(formData));
-        // if (res) {
-        //   setLectures(res);
-        // }
+        const res = await dispatch(getLecturesInCourse(courseId));
+        if (res) {
+          setLectures(res.payload);
+        }
       }
     };
 
@@ -52,18 +48,18 @@ function MyLecturePage() {
       setLectures(lecturesByTeacher);
     }
     // If you implement lecturesByStudent, include it here as well.
-    // if (role === 'Student') {
-    //   setLectures(lecturesByStudent);
-    // }
+    if (role === 'Student') {
+      setLectures(lecturesByStudent);
+    }
   }, [lecturesByTeacher, role]);
-
+ 
   return (
     <div className="container">
       <div className="row">
         <h1>دروسي</h1>
       </div>
       <div className="row mt-5 d-flex justify-content-center">
-        {lectures.length > 0 ? (
+        {lectures ? (
           <CardLecture lectures={lectures} role={role} />
         ) : (
           <Spinner />
